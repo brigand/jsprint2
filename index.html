@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jsprint - console.log to the document</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="description" content="display JavaScript variables as HTML">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center"><code>jsprint</code> - console.log to the document</h1>
+    <hr>
+    <div class="row">
+        <div class="col-6" style="height: 400px; overflow-y: auto" id="jsprint-root">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="field">
+                <span style="text-align: right">jsprint(</span>
+                <input type="text" id="test-console" autofocus/>
+                <span>)</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h2>How does it work?</h2>
+
+    <p>Link to the 8kb minified file, and you can start printing. It includes all the styles used to display it.</p>
+
+    <pre>//brigand.github.io/jsprint2/build/jsprint.min.js</pre>
+    <pre>&lt;script src="//brigand.github.io/jsprint2/build/jsprint.min.js"&gt;&lt;/script&gt;</pre>
+    <div class="col-6">
+        <a href="http://codepen.io/pen/def?fork=twBfK" class="btn btn-block btn-primary">Try it on CodePen</a>
+    </div>
+    <form class="col-6" action="http://jsfiddle.net/api/post/library/pure/" method="POST">
+        <input type="submit" class="btn btn-block btn-primary" value="Try it on JSFiddle">
+        <input type="hidden" name="resources" value="http://brigand.github.io/jsprint2/build/jsprint.min.js"/>
+        <input type="hidden" name="title" value="jsprint fiddle (github.com/brigand/jsprint2)"/>
+        <input type="hidden" name="wrap" value="b"/>
+        <textarea name="js" cols="0" rows="0" class="hidden">
+jsprint("some text");
+jsprint({favoriteNumbers: [42, 7, 13]});
+jsprint("multiple things", "in", "one command", 90, null, undefined, 1/0, NaN, 22);
+        </textarea>
+    </form>
+
+    <hr>
+
+    <h2 style="margin-top: 2em">API</h2>
+
+    <div class="panel" name="jsprint">
+        <div class="panel-heading"><code>jsprint(thing &lt;String|Number|Object|Array&gt;)</code></div>
+        <p>Pass nearly anything as the first parameter.</p>
+
+        <p>To get a feel for it, try the above console.</p>
+    </div>
+</div>
+
+<script type="text/javascript" src="build/jsprint.min.js"></script>
+<script>
+    (function () {
+        var input = document.getElementById("test-console");
+        input.addEventListener("keypress", function (e) {
+            if ( e.keyCode === 13) {
+                var value = input.value;
+                input.value = "";
+                var result;
+
+                try {
+                    result = new Function("return " + value).call(null);
+                    jsprint(result);
+                }
+                catch (e) {
+                    jsprint("Sorry, that seems to have an error");
+                }
+            }
+        })
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+#jsprint-root {
+    width: 90%;
+    margin: 1em auto;
+    box-shadow: 0 0 3px gray;
+    border-radius: 2em;
+    box-sizing: border-box;
+    padding: 2em;
+    font-size: 1.5em;
+}
+
+#jsprint-root .dropdown, #jsprint-root .star, #jsprint-root .label {
+    font-family: monospace;
+    color: maroon;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#jsprint-root .star {
+    cursor: auto;
+}
+
+#jsprint-root .star + * {
+    display: inline-block;
+}
+
+#jsprint-root .dropdown:not(.open) ~ .body {
+    display: none;
+}
+
+#jsprint-root .dropdown.open {
+    -webkit-transform: rotateZ(90deg);
+    -moz-transform: rotateZ(90deg);
+    transform: rotateZ(90deg);
+}
+
+#jsprint-root .item .dropdown ~ .body {
+    padding-left: 1em;
+    border-left: 1px solid dimgray;
+}
